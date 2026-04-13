@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — LuxeCater</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- ======= SIDEBAR ======= -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">LuxeCater</span>
+      <span class="admin-badge">Admin</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Overview</div>
+      <a class="sidebar-link active" data-panel="dashboard">
+        <span class="link-icon">📊</span> Dashboard
+      </a>
+      <a class="sidebar-link" data-panel="bookings">
+        <span class="link-icon">📅</span> Bookings
+        <span class="link-badge" id="pendingCount">3</span>
+      </a>
+      <a class="sidebar-link" data-panel="customers">
+        <span class="link-icon">👥</span> Customers
+      </a>
+
+      <div class="nav-section-title" style="margin-top:1rem;">Operations</div>
+      <a class="sidebar-link" data-panel="menu-manager">
+        <span class="link-icon">🍽️</span> Menu Manager
+      </a>
+      <a class="sidebar-link" data-panel="payments">
+        <span class="link-icon">💳</span> Payments
+      </a>
+      <a class="sidebar-link" data-panel="staff">
+        <span class="link-icon">👨‍🍳</span> Staff
+      </a>
+
+      <div class="nav-section-title" style="margin-top:1rem;">Settings</div>
+      <a class="sidebar-link" href="index.html" target="_blank">
+        <span class="link-icon">🌐</span> View Website
+      </a>
+      <a class="sidebar-link" data-panel="settings">
+        <span class="link-icon">⚙️</span> Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="admin-user">
+        <div class="admin-avatar">EA</div>
+        <div class="admin-user-info">
+          <strong>Chef Emeka</strong>
+          <span>Administrator</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======= MAIN ======= -->
+  <main class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search…" />
+        </div>
+        <button class="notification-btn" id="notifBtn" aria-label="Notifications">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+          <span class="notif-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- ===== DASHBOARD PANEL ===== -->
+      <div class="admin-panel active" id="panel-dashboard">
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat-card" style="--accent:#c9a84c;--icon-bg:rgba(201,168,76,0.12);">
+            <div class="stat-card-header">
+              <span>Total Revenue</span>
+              <div class="stat-icon">💰</div>
+            </div>
+            <div class="stat-card-value">₦12.4M</div>
+            <div class="stat-card-change up">↑ 18.2% from last month</div>
+          </div>
+          <div class="stat-card" style="--accent:#3b82f6;--icon-bg:rgba(59,130,246,0.12);">
+            <div class="stat-card-header">
+              <span>Total Bookings</span>
+              <div class="stat-icon">📅</div>
+            </div>
+            <div class="stat-card-value">47</div>
+            <div class="stat-card-change up">↑ 12 new this month</div>
+          </div>
+          <div class="stat-card" style="--accent:#22c55e;--icon-bg:rgba(34,197,94,0.12);">
+            <div class="stat-card-header">
+              <span>Events This Month</span>
+              <div class="stat-icon">🎉</div>
+            </div>
+            <div class="stat-card-value">9</div>
+            <div class="stat-card-change up">↑ 3 more than last month</div>
+          </div>
+          <div class="stat-card" style="--accent:#ef4444;--icon-bg:rgba(239,68,68,0.12);">
+            <div class="stat-card-header">
+              <span>Pending Quotes</span>
+              <div class="stat-icon">⏳</div>
+            </div>
+            <div class="stat-card-value">3</div>
+            <div class="stat-card-change down">Requires attention</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions-grid">
+          <div class="quick-action" onclick="switchPanel('bookings')">
+            <div class="qa-icon">📅</div>
+            <div class="qa-label">New Booking</div>
+          </div>
+          <div class="quick-action" onclick="switchPanel('menu-manager')">
+            <div class="qa-icon">🍽️</div>
+            <div class="qa-label">Add Menu Item</div>
+          </div>
+          <div class="quick-action" onclick="switchPanel('customers')">
+            <div class="qa-icon">👥</div>
+            <div class="qa-label">View Customers</div>
+          </div>
+          <div class="quick-action" onclick="showToastAdmin('Generating monthly report…', '📊')">
+            <div class="qa-icon">📊</div>
+            <div class="qa-label">Export Report</div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Monthly Revenue</h3>
+              <select class="chart-select">
+                <option>2026</option>
+                <option>2025</option>
+              </select>
+            </div>
+            <div class="mini-bars" id="revenueChart"></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3>Event Types</h3>
+            </div>
+            <div class="donut-wrap">
+              <svg class="donut-chart" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#1e1e1e" stroke-width="20"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#c9a84c" stroke-width="20"
+                  stroke-dasharray="100 151" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#3b82f6" stroke-width="20"
+                  stroke-dasharray="60 191" stroke-dashoffset="-100" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#22c55e" stroke-width="20"
+                  stroke-dasharray="40 211" stroke-dashoffset="-160" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#ef4444" stroke-width="20"
+                  stroke-dasharray="51 200" stroke-dashoffset="-200" stroke-linecap="round"/>
+              </svg>
+              <div class="donut-center">
+                <div class="donut-val">47</div>
+                <div class="donut-lbl">Total Events</div>
+              </div>
+            </div>
+            <div class="donut-legend">
+              <div class="legend-item"><div class="legend-dot-text"><span class="legend-dot" style="background:#c9a84c;"></span>Weddings</div><strong>40%</strong></div>
+              <div class="legend-item"><div class="legend-dot-text"><span class="legend-dot" style="background:#3b82f6;"></span>Corporate</div><strong>24%</strong></div>
+              <div class="legend-item"><div class="legend-dot-text"><span class="legend-dot" style="background:#22c55e;"></span>Parties</div><strong>16%</strong></div>
+              <div class="legend-item"><div class="legend-dot-text"><span class="legend-dot" style="background:#ef4444;"></span>Other</div><strong>20%</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Bookings -->
+        <div class="admin-table-wrap">
+          <div class="table-header">
+            <h2>Recent Bookings</h2>
+            <div class="table-actions">
+              <button class="admin-btn admin-btn-primary" onclick="switchPanel('bookings')">View All</button>
+            </div>
+          </div>
+          <table>
+            <thead><tr>
+              <th>Client</th><th>Event Type</th><th>Date</th><th>Guests</th><th>Value</th><th>Status</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="recentBookingsTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== BOOKINGS PANEL ===== -->
+      <div class="admin-panel" id="panel-bookings">
+        <div class="admin-table-wrap">
+          <div class="table-header">
+            <h2>All Bookings</h2>
+            <div class="table-actions">
+              <div class="table-search">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" placeholder="Search bookings…" id="bookingSearch" />
+              </div>
+              <button class="admin-btn admin-btn-primary" onclick="openModal('newBookingModal')">+ New Booking</button>
+            </div>
+          </div>
+          <table>
+            <thead><tr>
+              <th>Ref</th><th>Client</th><th>Event</th><th>Date</th><th>Location</th><th>Guests</th><th>Value</th><th>Status</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="allBookingsTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CUSTOMERS PANEL ===== -->
+      <div class="admin-panel" id="panel-customers">
+        <div class="admin-table-wrap">
+          <div class="table-header">
+            <h2>Customer Database</h2>
+            <div class="table-actions">
+              <div class="table-search">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" placeholder="Search customers…" />
+              </div>
+            </div>
+          </div>
+          <table>
+            <thead><tr>
+              <th>Name</th><th>Email</th><th>Phone</th><th>Events</th><th>Total Spend</th><th>Last Event</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="customersTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== MENU MANAGER ===== -->
+      <div class="admin-panel" id="panel-menu-manager">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+          <h2 style="font-size:1.1rem;font-weight:700;color:var(--text-p);">Menu Items</h2>
+          <button class="admin-btn admin-btn-primary" onclick="openModal('addMenuModal')">+ Add New</button>
+        </div>
+        <div class="menu-manager-grid" id="menuManagerGrid"></div>
+      </div>
+
+      <!-- ===== PAYMENTS PANEL ===== -->
+      <div class="admin-panel" id="panel-payments">
+        <div class="stats-row" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card" style="--accent:#22c55e;--icon-bg:rgba(34,197,94,0.12);">
+            <div class="stat-card-header"><span>Total Collected</span><div class="stat-icon">✅</div></div>
+            <div class="stat-card-value">₦8.9M</div>
+            <div class="stat-card-change up">↑ Confirmed payments</div>
+          </div>
+          <div class="stat-card" style="--accent:#f59e0b;--icon-bg:rgba(245,158,11,0.12);">
+            <div class="stat-card-header"><span>Pending</span><div class="stat-icon">⏳</div></div>
+            <div class="stat-card-value">₦3.5M</div>
+            <div class="stat-card-change" style="color:var(--warning);">Awaiting payment</div>
+          </div>
+          <div class="stat-card" style="--accent:#ef4444;--icon-bg:rgba(239,68,68,0.12);">
+            <div class="stat-card-header"><span>Overdue</span><div class="stat-icon">⚠️</div></div>
+            <div class="stat-card-value">₦520K</div>
+            <div class="stat-card-change down">Requires follow-up</div>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <div class="table-header"><h2>Payment Records</h2></div>
+          <table>
+            <thead><tr><th>Client</th><th>Event</th><th>Amount</th><th>Paid</th><th>Balance</th><th>Method</th><th>Status</th></tr></thead>
+            <tbody id="paymentsTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== STAFF PANEL ===== -->
+      <div class="admin-panel" id="panel-staff">
+        <div class="stats-row" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card" style="--accent:#c9a84c;--icon-bg:rgba(201,168,76,0.12);">
+            <div class="stat-card-header"><span>Total Staff</span><div class="stat-icon">👥</div></div>
+            <div class="stat-card-value">32</div>
+            <div class="stat-card-change up">Full time & contract</div>
+          </div>
+          <div class="stat-card" style="--accent:#22c55e;--icon-bg:rgba(34,197,94,0.12);">
+            <div class="stat-card-header"><span>Available Today</span><div class="stat-icon">✅</div></div>
+            <div class="stat-card-value">18</div>
+            <div class="stat-card-change up">Ready for assignment</div>
+          </div>
+          <div class="stat-card" style="--accent:#3b82f6;--icon-bg:rgba(59,130,246,0.12);">
+            <div class="stat-card-header"><span>On Assignment</span><div class="stat-icon">📍</div></div>
+            <div class="stat-card-value">14</div>
+            <div class="stat-card-change" style="color:var(--info);">At active events</div>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <div class="table-header"><h2>Staff Directory</h2><div class="table-actions"><button class="admin-btn admin-btn-primary">+ Add Staff</button></div></div>
+          <table>
+            <thead><tr><th>Name</th><th>Role</th><th>Phone</th><th>Availability</th><th>Events Completed</th><th>Status</th></tr></thead>
+            <tbody id="staffTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== SETTINGS PANEL ===== -->
+      <div class="admin-panel" id="panel-settings">
+        <div style="max-width:600px;">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--text-p);margin-bottom:2rem;">Business Settings</h2>
+          <form class="admin-form">
+            <div class="form-group"><label>Business Name</label><input type="text" value="LuxeCater Nigeria" /></div>
+            <div class="form-group"><label>Phone</label><input type="tel" value="+234 801 234 5678" /></div>
+            <div class="form-group"><label>Email</label><input type="email" value="hello@luxecater.ng" /></div>
+            <div class="form-group"><label>Address</label><input type="text" value="3 Bourdillon Rd, Ikoyi, Lagos" /></div>
+            <div class="form-group"><label>Default Currency</label><select><option>NGN (₦)</option><option>USD ($)</option><option>GBP (£)</option></select></div>
+            <div class="form-group"><label>Base Price per Head (₦)</label><input type="number" value="9000" /></div>
+            <div class="form-group"><label>WhatsApp Number</label><input type="tel" value="+2348012345678" /></div>
+            <div style="margin-top:1.5rem;display:flex;gap:0.75rem;">
+              <button type="button" class="admin-btn admin-btn-primary" onclick="showToastAdmin('Settings saved!','✅')">Save Changes</button>
+              <button type="button" class="admin-btn admin-btn-secondary">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </main>
+
+  <!-- ===== MODALS ===== -->
+  <!-- New Booking Modal -->
+  <div class="modal-overlay" id="newBookingModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>New Booking</h3>
+        <button class="modal-close" onclick="closeModal('newBookingModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form class="admin-form" id="adminBookingForm">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group"><label>Client Name</label><input type="text" placeholder="Full name" /></div>
+            <div class="form-group"><label>Phone</label><input type="tel" placeholder="+234…" /></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="email@example.com" /></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group"><label>Event Type</label><select><option>Wedding</option><option>Corporate</option><option>Birthday</option><option>Graduation</option><option>Other</option></select></div>
+            <div class="form-group"><label>Guest Count</label><input type="number" placeholder="e.g. 200" /></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group"><label>Event Date</label><input type="date" /></div>
+            <div class="form-group"><label>Budget (₦)</label><input type="number" placeholder="e.g. 500000" /></div>
+          </div>
+          <div class="form-group"><label>Venue / Location</label><input type="text" placeholder="Event venue" /></div>
+          <div class="form-group"><label>Notes</label><textarea placeholder="Special requirements…"></textarea></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="admin-btn admin-btn-secondary" onclick="closeModal('newBookingModal')">Cancel</button>
+        <button class="admin-btn admin-btn-primary" onclick="submitAdminBooking()">Create Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Menu Item Modal -->
+  <div class="modal-overlay" id="addMenuModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Menu Item</h3>
+        <button class="modal-close" onclick="closeModal('addMenuModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form class="admin-form">
+          <div class="form-group"><label>Item Name</label><input type="text" placeholder="e.g. Grand Jollof Rice" /></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group"><label>Category</label><select><option>Rice & Grains</option><option>Proteins</option><option>Soups</option><option>Small Chops</option><option>Desserts</option><option>Drinks</option></select></div>
+            <div class="form-group"><label>Price per Head (₦)</label><input type="number" placeholder="e.g. 4500" /></div>
+          </div>
+          <div class="form-group"><label>Description</label><textarea placeholder="Item description…"></textarea></div>
+          <div class="form-group"><label>Dietary Tags</label>
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.4rem;">
+              <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;text-transform:none;letter-spacing:0;color:var(--text-s);" ><input type="checkbox" style="accent-color:var(--gold);width:14px;height:14px;" /> Halal</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;text-transform:none;letter-spacing:0;color:var(--text-s);"><input type="checkbox" style="accent-color:var(--gold);width:14px;height:14px;" /> Vegan</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;text-transform:none;letter-spacing:0;color:var(--text-s);"><input type="checkbox" style="accent-color:var(--gold);width:14px;height:14px;" /> Gluten-Free</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;text-transform:none;letter-spacing:0;color:var(--text-s);"><input type="checkbox" style="accent-color:var(--gold);width:14px;height:14px;" /> Dairy-Free</label>
+              <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;text-transform:none;letter-spacing:0;color:var(--text-s);"><input type="checkbox" style="accent-color:var(--gold);width:14px;height:14px;" /> Spicy</label>
+            </div>
+          </div>
+          <div class="form-group"><label>Image URL</label><input type="url" placeholder="https://…" /></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="admin-btn admin-btn-secondary" onclick="closeModal('addMenuModal')">Cancel</button>
+        <button class="admin-btn admin-btn-primary" onclick="saveMenuItem()">Save Item</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
